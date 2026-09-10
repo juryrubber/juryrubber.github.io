@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜同社区-兴趣同好交流与热门话题互动平台</title>
+    <meta name="description" content="搜同社区是一个专注于兴趣同好交流的在线互动平台，提供热门话题、分众兴趣小组、经验分享与互助问答。在这里找到和你志同道合的朋友，一起参与深度讨论和日常交流。">
+    <meta name="keywords" content="搜同社区,同好社区,兴趣小组,话题讨论,互动交流,交友社区,兴趣社交">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #f3f5f7;
+            color: #24292f;
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .site-header {
+            background-color: #ffffff;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #4a6cf7, #7a5af8);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1f2328;
+            letter-spacing: 0.5px;
+        }
+        .logo-text span {
+            color: #4a6cf7;
+        }
+        .main-nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+        .main-nav a {
+            font-size: 15px;
+            font-weight: 500;
+            color: #424a57;
+            transition: color 0.2s;
+            position: relative;
+        }
+        .main-nav a:hover,
+        .main-nav a.active {
+            color: #4a6cf7;
+        }
+        .main-nav a.active::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -22px;
+            width: 100%;
+            height: 3px;
+            background-color: #4a6cf7;
+            border-radius: 3px 3px 0 0;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .search-box {
+            display: flex;
+            align-items: center;
+            background-color: #f0f2f5;
+            border-radius: 20px;
+            padding: 6px 16px;
+            width: 220px;
+        }
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            width: 100%;
+            color: #24292f;
+        }
+        .search-box svg {
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+            fill: #8c959f;
+        }
+        .btn-login {
+            background-color: #4a6cf7;
+            color: #fff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-login:hover {
+            background-color: #3a5bd9;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(145deg, #eef2ff 0%, #f9f7ff 100%);
+            border-bottom: 1px solid #e9e7f5;
+            padding: 56px 0 48px;
+        }
+        .hero-container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .hero-content {
+            flex: 1 1 500px;
+        }
+        .hero-tag {
+            display: inline-block;
+            background-color: rgba(74, 108, 247, 0.12);
+            color: #4a6cf7;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-bottom: 18px;
+        }
+        .hero-content h1 {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.3;
+            color: #1f2328;
+            margin-bottom: 16px;
+        }
+        .hero-content p {
+            font-size: 16px;
+            color: #57606a;
+            max-width: 560px;
+            margin-bottom: 28px;
+        }
+        .hero-btns {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background-color: #4a6cf7;
+            color: #fff;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .btn-primary:hover {
+            background-color: #3a5bd9;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(74, 108, 247, 0.25);
+        }
+        .btn-outline {
+            background-color: transparent;
+            color: #4a6cf7;
+            border: 2px solid #4a6cf7;
+            padding: 10px 26px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .btn-outline:hover {
+            background-color: rgba(74, 108, 247, 0.08);
+        }
+        .hero-stats {
+            display: flex;
+            gap: 36px;
+            margin-top: 40px;
+        }
+        .stat-item {
+            text-align: left;
+        }
+        .stat-item strong {
+            display: block;
+            font-size: 28px;
+            font-weight: 800;
+            color: #1f2328;
+        }
+        .stat-item span {
+            font-size: 14px;
+            color: #8c959f;
+        }
+        .hero-illustration {
+            flex: 0 0 320px;
+            height: 260px;
+            background: linear-gradient(135deg, #dbe4ff, #e8dcff);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-illustration::before {
+            content: "";
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            top: -40px;
+            right: -40px;
+        }
+        .hero-illustration span {
+            font-size: 80px;
+            opacity: 0.8;
+        }
+
+        /* Category Pills */
+        .category-bar {
+            background-color: #fff;
+            padding: 20px 0;
+            border-bottom: 1px solid #e9e9e9;
+        }
+        .category-list {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .category-item {
+            padding: 6px 18px;
+            background-color: #f0f2f5;
+            border-radius: 20px;
+            font-size: 14px;
+            color: #424a57;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .category-item:hover,
+        .category-item.active {
+            background-color: #eef2ff;
+            color: #4a6cf7;
+            border-color: #c7d2fe;
+        }
+
+        /* Main Layout */
+        .main-layout {
+            display: flex;
+            gap: 24px;
+            padding: 28px 0 40px;
+            flex-wrap: wrap;
+        }
+        .content-main {
+            flex: 1 1 680px;
+            min-width: 0;
+        }
+        .content-side {
+            flex: 0 1 320px;
+            min-width: 260px;
+        }
+
+        /* Section Title */
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        .section-title h2 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1f2328;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title h2::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background-color: #4a6cf7;
+            border-radius: 4px;
+        }
+        .section-title .more-link {
+            font-size: 14px;
+            color: #8c959f;
+        }
+        .section-title .more-link:hover {
+            color: #4a6cf7;
+        }
+
+        /* Post Cards */
+        .post-list {
+            background-color: #fff;
+            border-radius: 16px;
+            padding: 8px 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+        .post-item {
+            padding: 18px 24px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            transition: background 0.15s;
+        }
+        .post-item:last-child {
+            border-bottom: none;
+        }
+        .post-item:hover {
+            background-color: #fafbfc;
+        }
+        .post-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background-color: #e4e9f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #4a6cf7;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        .post-content {
+            flex: 1;
+            min-width: 0;
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 6px;
+        }
+        .post-author {
+            font-weight: 600;
+            font-size: 14px;
+            color: #24292f;
+        }
+        .post-time {
+            font-size: 13px;
+            color: #8c959f;
+        }
+        .post-badge {
+            background-color: #eef2ff;
+            color: #4a6cf7;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        .post-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #1f2328;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+        .post-title:hover {
+            color: #4a6cf7;
+        }
+        .post-excerpt {
+            font-size: 14px;
+            color: #57606a;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .post-meta {
+            display: flex;
+            gap: 18px;
+            font-size: 13px;
+            color: #8c959f;
+        }
+        .post-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .post-meta svg {
+            width: 14px;
+            height: 14px;
+            fill: #8c959f;
+        }
+
+        /* Sidebar Widgets */
+        .widget {
+            background-color: #fff;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+        .widget-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            color: #1f2328;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .widget-title::before {
+            content: "";
+            width: 4px;
+            height: 18px;
+            background-color: #7a5af8;
+            border-radius: 4px;
+        }
+        .hot-topic-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f5f5f5;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .hot-topic-list li:last-child {
+            border-bottom: none;
+        }
+        .topic-rank {
+            font-size: 18px;
+            font-weight: 800;
+            color: #d0d7de;
+            width: 24px;
+            text-align: center;
+        }
+        .hot-topic-list li:nth-child(1) .topic-rank {
+            color: #f47068;
+        }
+        .hot-topic-list li:nth-child(2) .topic-rank {
+            color: #f7a35c;
+        }
+        .hot-topic-list li:nth-child(3) .topic-rank {
+            color: #f7d154;
+        }
+        .topic-info {
+            flex: 1;
+        }
+        .topic-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #24292f;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .topic-name:hover {
+            color: #4a6cf7;
+        }
+        .topic-count {
+            font-size: 12px;
+            color: #8c959f;
+        }
+
+        /* Group List */
+        .group-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .group-item:last-child {
+            border-bottom: none;
+        }
+        .group-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .group-info {
+            flex: 1;
+        }
+        .group-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #24292f;
+        }
+        .group-meta {
+            font-size: 12px;
+            color: #8c959f;
+        }
+
+        /* User Card */
+        .user-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .user-card:last-child {
+            border-bottom: none;
+        }
+        .user-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4a6cf7, #7a5af8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .user-info {
+            flex: 1;
+        }
+        .user-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        .user-bio {
+            font-size: 12px;
+            color: #8c959f;
+        }
+        .btn-follow {
+            background-color: #eef2ff;
+            color: #4a6cf7;
+            padding: 5px 14px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-follow:hover {
+            background-color: #dbe4ff;
+        }
+
+        /* Tabs */
+        .tab-nav {
+            display: flex;
+            gap: 4px;
+            background-color: #f0f2f5;
+            padding: 4px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+        }
+        .tab-nav button {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 8px 0;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #57606a;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .tab-nav button.active {
+            background-color: #fff;
+            color: #4a6cf7;
+            font-weight: 600;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        /* CTA Banner */
+        .cta-banner {
+            background: linear-gradient(135deg, #4a6cf7, #7a5af8);
+            border-radius: 20px;
+            padding: 36px 40px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 32px 0;
+        }
+        .cta-banner h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .cta-banner p {
+            opacity: 0.9;
+            font-size: 15px;
+        }
+        .cta-btn {
+            background-color: #fff;
+            color: #4a6cf7;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .cta-btn:hover {
+            transform: scale(1.03);
+        }
+
+        /* FAQ */
+        .faq-section {
+            background-color: #fff;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        }
+        .faq-item {
+            padding: 16px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-question {
+            font-weight: 600;
+            font-size: 16px;
+            color: #1f2328;
+            margin-bottom: 6px;
+            display: flex;
+            gap: 8px;
+            align-items: baseline;
+        }
+        .faq-question::before {
+            content: "Q";
+            background-color: #eef2ff;
+            color: #4a6cf7;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+        .faq-answer {
+            font-size: 14px;
+            color: #57606a;
+            padding-left: 28px;
+        }
+        .faq-answer::before {
+            content: "A";
+            background-color: #f0f2f5;
+            color: #8c959f;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: #fff;
+            border-top: 1px solid #e9e9e9;
+            padding: 32px 0 24px;
+            margin-top: 20px;
+        }
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: space-between;
+        }
+        .footer-brand {
+            max-width: 300px;
+        }
+        .footer-brand h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #1f2328;
+        }
+        .footer-brand p {
+            font-size: 14px;
+            color: #8c959f;
+        }
+        .footer-links {
+            display: flex;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+        .footer-col h4 {
+            font-size: 15px;
+            margin-bottom: 10px;
+            color: #24292f;
+        }
+        .footer-col ul li {
+            margin-bottom: 6px;
+        }
+        .footer-col ul a {
+            font-size: 14px;
+            color: #57606a;
+        }
+        .footer-col ul a:hover {
+            color: #4a6cf7;
+        }
+        .footer-bottom {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-size: 13px;
+            color: #8c959f;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .main-nav {
+                display: none;
+            }
+            .hero-illustration {
+                display: none;
+            }
+            .hero-content h1 {
+                font-size: 28px;
+            }
+            .content-side {
+                flex: 1 1 100%;
+            }
+            .search-box {
+                width: 150px;
+            }
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 0 14px;
+            }
+            .header-actions .btn-login {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            .hero {
+                padding: 36px 0 28px;
+            }
+            .hero-content h1 {
+                font-size: 24px;
+            }
+            .hero-stats {
+                gap: 20px;
+            }
+            .stat-item strong {
+                font-size: 22px;
+            }
+            .post-item {
+                padding: 14px 16px;
+            }
+            .cta-banner {
+                padding: 24px;
+            }
+            .footer-links {
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <div class="logo-area">
+                <div class="logo-icon">搜</div>
+                <div class="logo-text">搜同<span>社区</span></div>
+            </div>
+            <nav class="main-nav">
+                <a href="#" class="active">首页</a>
+                <a href="#">话题</a>
+                <a href="#">小组</a>
+                <a href="#">问答</a>
+                <a href="#">活动</a>
+            </nav>
+            <div class="header-actions">
+                <div class="search-box">
+                    <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
+                    <input type="text" placeholder="搜索感兴趣的话题...">
+                </div>
+                <button class="btn-login">登录 / 注册</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <span class="hero-tag">✨ 同好聚集地</span>
+                <h1>找到你的同好，<br>分享你的热爱</h1>
+                <p>搜同社区是专为兴趣同好打造的交流平台。无论你热爱什么，都能在这里找到懂你的人。加入小组、参与讨论、分享经验，让每一次交流都有价值。</p>
+                <div class="hero-btns">
+                    <a href="#" class="btn-primary">立即加入社区</a>
+                    <a href="#" class="btn-outline">浏览热门话题</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <strong>120万+</strong>
+                        <span>注册用户</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>8,600+</strong>
+                        <span>兴趣小组</span>
+                    </div>
+                    <div class="stat-item">
+                        <strong>50万+</strong>
+                        <span>每日讨论</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-illustration">
+                <span>💬</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="category-bar">
+        <div class="container category-list">
+            <span class="category-item active">推荐</span>
+            <span class="category-item">科技数码</span>
+            <span class="category-item">影视综艺</span>
+            <span class="category-item">游戏电竞</span>
+            <span class="category-item">读书文学</span>
+            <span class="category-item">音乐艺术</span>
+            <span class="category-item">运动健身</span>
+            <span class="category-item">美食旅行</span>
+            <span class="category-item">情感树洞</span>
+            <span class="category-item">学习职场</span>
+            <span class="category-item">生活家</span>
+        </div>
+    </div>
+
+    <main class="container main-layout">
+        <div class="content-main">
+            <!-- 热门动态 -->
+            <div class="section-title">
+                <h2>热门动态</h2>
+                <a href="#" class="more-link">查看更多 →</a>
+            </div>
+            <div class="post-list">
+                <article class="post-item">
+                    <div class="post-avatar">林</div>
+                    <div class="post-content">
+                        <div class="post-header">
+                            <span class="post-author">林间风</span>
+                            <span class="post-time">12分钟前</span>
+                            <span class="post-badge">摄影</span>
+                        </div>
+                        <h3 class="post-title">分享一组最近拍的星空，城市里也能看到银河</h3>
+                        <p class="post-excerpt">昨晚在郊外蹲了三个小时，终于等到云层散开。虽然光污染还是有点严重，但后期处理后效果意外的好。有没有同好一起交流下长曝光技巧？</p>
+                        <div class="post-meta">
+                            <span>💬 128 评论</span>
+                            <span>👍 356 点赞</span>
+                            <span>↗ 分享</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="post-item">
+                    <div class="post-avatar">M</div>
+                    <div class="post-content">
+                        <div class="post-header">
+                            <span class="post-author">Momo酱</span>
+                            <span class="post-time">35分钟前</span>
+                            <span class="post-badge">手账</span>
+                        </div>
+                        <h3 class="post-title">2025手账体系搭建完成！分享我的排版思路</h3>
+                        <p class="post-excerpt">今年尝试了新的weekly+buJo结合方式，用了两个月感觉效率提升了不少。把内页设计和素材搭配都整理出来了，欢迎围观提建议~</p>
+                        <div class="post-meta">
+                            <span>💬 89 评论</span>
+                            <span>👍 234 点赞</span>
+                            <span>↗ 分享</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="post-item">
+                    <div class="post-avatar">K</div>
+                    <div class="post-content">
+                        <div class="post-header">
+                            <span class="post-author">Kevin_Code</span>
+                            <span class="post-time">1小时前</span>
+                            <span class="post-badge">编程</span>
+                        </div>
+                        <h3 class="post-title">从零开始学Python：给初学者的10条实用建议</h3>
+                        <p class="post-excerpt">最近在小组里看到很多新人问怎么入门编程。结合自己三年自学经验整理了一些避坑指南，希望对想学编程的朋友有帮助。</p>
+                        <div class="post-meta">
+                            <span>💬 167 评论</span>
+                            <span>👍 412 点赞</span>
+                            <span>↗ 分享</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="post-item">
+                    <div class="post-avatar">鱼</div>
+                    <div class="post-content">
+                        <div class="post-header">
+                            <span class="post-author">一条鱼</span>
+                            <span class="post-time">2小时前</span>
+                            <span class="post-badge">桌游</span>
+                        </div>
+                        <h3 class="post-title">周末线下桌游局招募！坐标上海徐汇</h3>
+                        <p class="post-excerpt">目前已有5人，想再找3-4位小伙伴一起玩。主要玩德式策略和轻策聚会类，新手也欢迎，有老手带。</p>
+                        <div class="post-meta">
+                            <span>💬 45 评论</span>
+                            <span>👍 78 点赞</span>
+                            <span>↗ 分享</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- 讨论专区 Tab切换 -->
+            <div style="margin-top: 36px;">
+                <div class="section-title">
+                    <h2>讨论专区</h2>
+                </div>
+                <div class="tab-nav">
+                    <button class="active" data-tab="latest">最新发布</button>
+                    <button data-tab="hot">本周热议</button>
+                    <button data-tab="unanswered">待解答</button>
+                </div>
+                <div class="post-list" id="tab-content">
+                    <article class="post-item">
+                        <div class="post-avatar">T</div>
+                        <div class="post-content">
+                            <div class="post-header">
+                                <span class="post-author">Tina</span>
+                                <span class="post-time">刚刚</span>
+                            </div>
+                            <h3 class="post-title">求推荐适合通勤路上听的播客节目</h3>
+                            <p class="post-excerpt">每天通勤来回大概1.5小时，想找一些有趣又有深度的中文播客，题材不限，大家有什么私藏推荐吗？</p>
+                            <div class="post-meta">
+                                <span>💬 23 评论</span>
+                                <span>👍 15 点赞</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="post-item">
+                        <div class="post-avatar">D</div>
+                        <div class="post-content">
+                            <div class="post-header">
+                                <span class="post-author">Dave</span>
+                                <span class="post-time">8分钟前</span>
+                            </div>
+                            <h3 class="post-title">机械键盘入门求教：青轴还是茶轴？</h3>
+                            <p class="post-excerpt">准备入手人生第一把机械键盘，主要在办公室用，偶尔在家打游戏。纠结轴体选择，有没有过来人给点建议？</p>
+                            <div class="post-meta">
+                                <span>💬 56 评论</span>
+                                <span>👍 32 点赞</span>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="post-item">
+                        <div class="post-avatar">雪</div>
+                        <div class="post-content">
+                            <div class="post-header">
+                                <span class="post-author">雪球球</span>
+                                <span class="post-time">25分钟前</span>
+                            </div>
+                            <h3 class="post-title">阳台种菜新手，番茄苗叶子发黄怎么办？</h3>
+                            <p class="post-excerpt">种了半个月的小番茄，最近发现底部叶子开始发黄卷曲。浇水频率大概2天一次，有阳光，是缺肥还是水多了？</p>
+                            <div class="post-meta">
+                                <span>💬 18 评论</span>
+                                <span>👍 9 点赞</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <!-- CTA 横幅 -->
+            <div class="cta-banner">
+                <div>
+                    <h2>还没找到你的同好圈子？</h2>
+                    <p>创建属于你自己的兴趣小组，发起讨论，吸引同好加入</p>
+                </div>
+                <button class="cta-btn">创建小组 →</button>
+            </div>
+
+            <!-- FAQ -->
+            <div class="faq-section">
+                <h2 style="font-size: 22px; margin-bottom: 16px; font-weight: 700;">关于搜同社区，你可能想知道</h2>
+                <div class="faq-item">
+                    <div class="faq-question">搜同社区是什么类型的平台？</div>
+                    <div class="faq-answer">搜同社区是一个面向兴趣同好的中文交流社区。用户可以根据自己的爱好加入不同的小组，参与话题讨论、发布动态、提问答疑，也可以自己创建新的话题圈子。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">如何加入或创建兴趣小组？</div>
+                    <div class="faq-answer">注册登录后，在首页或小组页面浏览所有公开小组，点击"加入"即可成为成员。创建新小组需要账号达到一定等级（通常注册满7天并完成手机验证），点击右上角"创建小组"按流程填写信息即可。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">社区的内容审核机制是怎样的？</div>
+                    <div class="faq-answer">搜同社区采用"用户举报+系统过滤+人工复核"三层机制。所有新用户发言需通过基础审核，老用户发言触发敏感词或收到举报时会进入人工队列。我们致力于维护友善、理性的讨论环境。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">是否可以完全匿名发言？</div>
+                    <div class="faq-answer">部分特定小组（如情感树洞）支持匿名发帖功能，在这些小组内发言可以选择隐藏用户名。但在绝大多数公开小组中，发言会关联你的社区账号，以保证讨论的可追溯性和责任感。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 侧边栏 -->
+        <aside class="content-side">
+            <!-- 热搜话题 -->
+            <div class="widget">
+                <h3 class="widget-title">🔥 热议话题</h3>
+                <ul class="hot-topic-list">
+                    <li>
+                        <span class="topic-rank">1</span>
+                        <div class="topic-info">
+                            <a href="#" class="topic-name"># 你心中的神级电影片段 #</a>
+                            <span class="topic-count">1.2万 讨论</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="topic-rank">2</span>
+                        <div class="topic-info">
+                            <a href="#" class="topic-name"># 通勤路上做什么 #</a>
+                            <span class="topic-count">8,956 讨论</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="topic-rank">3</span>
+                        <div class="topic-info">
+                            <a href="#" class="topic-name"># 一人一句家乡话 #</a>
+                            <span class="topic-count">7,320 讨论</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="topic-rank">4</span>
+                        <div class="topic-info">
+                            <a href="#" class="topic-name"># 我的年度书单分享 #</a>
+                            <span class="topic-count">6,784 讨论</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="topic-rank">5</span>
+                        <div class="topic-info">
+                            <a href="#" class="topic-name"># 养宠物的治愈瞬间 #</a>
+                            <span class="topic-count">5,902 讨论</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="topic-rank">6</span>
+                        <div class="topic-info">
+                            <a href="#" class="topic-name"># 断舍离打卡第7天 #</a>
+                            <span class="topic-count">4,563 讨论</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 推荐小组 -->
+            <div class="widget">
+                <h3 class="widget-title">📌 推荐小组</h3>
+                <div class="group-item">
+                    <div class="group-icon" style="background-color: #4a6cf7;">影</div>
+                    <div class="group-info">
+                        <div class="group-name">电影鉴赏局</div>
+                        <div class="group-meta">成员 4.2万 · 每日片单分享</div>
+                    </div>
+                </div>
+                <div class="group-item">
+                    <div class="group-icon" style="background-color: #f47068;">绘</div>
+                    <div class="group-info">
+                        <div class="group-name">插画涂鸦社</div>
+                        <div class="group-meta">成员 2.8万 · 每周主题创作</div>
+                    </div>
+                </div>
+                <div class="group-item">
+                    <div class="group-icon" style="background-color: #7a5af8;">码</div>
+                    <div class="group-info">
+                        <div class="group-name">程序员茶话会</div>
+                        <div class="group-meta">成员 3.5万 · 技术交流互助</div>
+                    </div>
+                </div>
+                <div class="group-item">
+                    <div class="group-icon" style="background-color: #2da44e;">跑</div>
+                    <div class="group-info">
+                        <div class="group-name">跑步爱好者</div>
+                        <div class="group-meta">成员 1.9万 · 配速打卡</div>
+                    </div>
+                </div>
+                <div class="group-item">
+                    <div class="group-icon" style="background-color: #f7a35c;">厨</div>
+                    <div class="group-info">
+                        <div class="group-name">厨房小白进阶</div>
+                        <div class="group-meta">成员 2.1万 · 每日一菜</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 活跃用户 -->
+            <div class="widget">
+                <h3 class="widget-title">👥 活跃同好</h3>
+                <div class="user-card">
+                    <div class="user-avatar">风</div>
+                    <div class="user-info">
+                        <div class="user-name">风居住的街道</div>
+                        <div class="user-bio">摄影 | 旅行</div>
+                    </div>
+                    <button class="btn-follow">+ 关注</button>
+                </div>
+                <div class="user-card">
+                    <div class="user-avatar">猫</div>
+                    <div class="user-info">
+                        <div class="user-name">猫粮分我一半</div>
+                        <div class="user-bio">铲屎官 | 猫奴</div>
+                    </div>
+                    <button class="btn-follow">+ 关注</button>
+                </div>
+                <div class="user-card">
+                    <div class="user-avatar">L</div>
+                    <div class="user-info">
+                        <div class="user-name">Lemonade</div>
+                        <div class="user-bio">书评人 | 咖啡重度依赖</div>
+                    </div>
+                    <button class="btn-follow">+ 关注</button>
+                </div>
+                <div class="user-card">
+                    <div class="user-avatar">山</div>
+                    <div class="user-info">
+                        <div class="user-name">山有木兮</div>
+                        <div class="user-bio">户外 | 露营装备控</div>
+                    </div>
+                    <button class="btn-follow">+ 关注</button>
+                </div>
+            </div>
+
+            <!-- 社区公告 -->
+            <div class="widget">
+                <h3 class="widget-title">📢 社区公告</h3>
+                <ul style="font-size: 14px; color: #57606a;">
+                    <li style="padding: 6px 0;">· 新版社区公约已发布，请各位成员仔细阅读</li>
+                    <li style="padding: 6px 0;">· 本周六晚8点线上圆桌：AI时代的创作与版权</li>
+                    <li style="padding: 6px 0;">· 社区年度同好大会报名通道开启</li>
+                    <li style="padding: 6px 0;">· 举报功能升级，处理时效提升至24小时内</li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>搜同社区</h3>
+                    <p>让每一种热爱都有回响。搜同社区致力于打造中文互联网最友善、最有价值的兴趣交流空间。</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>产品</h4>
+                        <ul>
+                            <li><a href="#">话题广场</a></li>
+                            <li><a href="#">兴趣小组</a></li>
+                            <li><a href="#">问答中心</a></li>
+                            <li><a href="#">同城活动</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>支持</h4>
+                        <ul>
+                            <li><a href="#">帮助中心</a></li>
+                            <li><a href="#">社区公约</a></li>
+                            <li><a href="#">反馈建议</a></li>
+                            <li><a href="#">举报与投诉</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>关于</h4>
+                        <ul>
+                            <li><a href="#">关于我们</a></li>
+                            <li><a href="#">加入我们</a></li>
+                            <li><a href="#">隐私政策</a></li>
+                            <li><a href="#">用户协议</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2025 搜同社区 保留所有权利 · 让热爱相遇
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab 切换逻辑
+        document.querySelectorAll('.tab-nav button').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.tab-nav button').forEach(function(b) {
+                    b.classList.remove('active');
+                });
+                this.classList.add('active');
+                // 实际项目中此处会切换数据，这里模拟提示
+                var tabId = this.getAttribute('data-tab');
+                var tabContent = document.getElementById('tab-content');
+                if (tabId === 'latest') {
+                    tabContent.innerHTML = '<article class="post-item"><div class="post-avatar">T</div><div class="post-content"><div class="post-header"><span class="post-author">Tina</span><span class="post-time">刚刚</span></div><h3 class="post-title">求推荐适合通勤路上听的播客节目</h3><p class="post-excerpt">每天通勤来回大概1.5小时，想找一些有趣又有深度的中文播客，题材不限，大家有什么私藏推荐吗？</p><div class="post-meta"><span>💬 23 评论</span><span>👍 15 点赞</span></div></div></article>';
+                } else if (tabId === 'hot') {
+                    tabContent.innerHTML = '<article class="post-item"><div class="post-avatar">K</div><div class="post-content"><div class="post-header"><span class="post-author">Kevin_Code</span><span class="post-time">1小时前</span></div><h3 class="post-title">从零开始学Python：给初学者的10条实用建议</h3><p class="post-excerpt">最近在小组里看到很多新人问怎么入门编程。结合自己三年自学经验整理了一些避坑指南，希望对想学编程的朋友有帮助。</p><div class="post-meta"><span>💬 167 评论</span><span>👍 412 点赞</span></div></div></article>';
+                } else {
+                    tabContent.innerHTML = '<article class="post-item"><div class="post-avatar">雪</div><div class="post-content"><div class="post-header"><span class="post-author">雪球球</span><span class="post-time">25分钟前</span></div><h3 class="post-title">阳台种菜新手，番茄苗叶子发黄怎么办？</h3><p class="post-excerpt">种了半个月的小番茄，最近发现底部叶子开始发黄卷曲。浇水频率大概2天一次，有阳光，是缺肥还是水多了？</p><div class="post-meta"><span>💬 18 评论</span><span>👍 9 点赞</span></div></div></article>';
+                }
+            });
+        });
+
+        // 分类点击效果
+        document.querySelectorAll('.category-item').forEach(function(item) {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.category-item').forEach(function(i) {
+                    i.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+
+        // 关注按钮切换
+        document.querySelectorAll('.btn-follow').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                if (this.textContent === '+ 关注') {
+                    this.textContent = '已关注';
+                    this.style.backgroundColor = '#e2e8f0';
+                    this.style.color = '#57606a';
+                } else {
+                    this.textContent = '+ 关注';
+                    this.style.backgroundColor = '#eef2ff';
+                    this.style.color = '#4a6cf7';
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</body>
+                      </html>
